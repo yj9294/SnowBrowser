@@ -29,7 +29,7 @@
 		C71E595D296D30E80035B48A /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = C71E595C296D30E80035B48A /* FirebaseCrashlytics */; };
 		C71E595F296D30E80035B48A /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = C71E595E296D30E80035B48A /* FirebaseRemoteConfig */; };
 		C71E5962296D314C0035B48A /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = C71E5961296D314C0035B48A /* FacebookCore */; };
-		C71E5964296E52DA0035B48A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C71E5963296E52DA0035B48A /* GoogleService-Info.plist */; };
+		C73D1A04299635BC00D3752F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C73D1A03299635BC00D3752F /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,7 +53,7 @@
 		C71E5953296BBB830035B48A /* CleanAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanAlertView.swift; sourceTree = "<group>"; };
 		C71E5955296BBFE80035B48A /* CleanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanViewController.swift; sourceTree = "<group>"; };
 		C71E5957296D305C0035B48A /* FirebaseHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseHelper.swift; sourceTree = "<group>"; };
-		C71E5963296E52DA0035B48A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C73D1A03299635BC00D3752F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,7 +107,7 @@
 				C71E59472967CD5C0035B48A /* BrowserHelper.swift */,
 				C71E5957296D305C0035B48A /* FirebaseHelper.swift */,
 				C71E59322966BC940035B48A /* Assets.xcassets */,
-				C71E5963296E52DA0035B48A /* GoogleService-Info.plist */,
+				C73D1A03299635BC00D3752F /* GoogleService-Info.plist */,
 				C71E59342966BC940035B48A /* LaunchScreen.storyboard */,
 				C71E59372966BC940035B48A /* Info.plist */,
 			);
@@ -183,7 +183,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C71E59362966BC940035B48A /* LaunchScreen.storyboard in Resources */,
-				C71E5964296E52DA0035B48A /* GoogleService-Info.plist in Resources */,
+				C73D1A04299635BC00D3752F /* GoogleService-Info.plist in Resources */,
 				C71E59332966BC940035B48A /* Assets.xcassets in Resources */,
 				C71E59312966BC920035B48A /* Main.storyboard in Resources */,
 			);
@@ -355,9 +355,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 7HTJ8C6E28;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SnowBrowser/Info.plist;
 				INFOPLIST_KEY_NSUserTrackingUsageDescription = "Please allow access to your activity tracking to provide personalized push services and reduce interference caused by irrelevant services.";
@@ -375,6 +375,7 @@
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.testbird.SnowBrowser;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
@@ -389,9 +390,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 7HTJ8C6E28;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SnowBrowser/Info.plist;
 				INFOPLIST_KEY_NSUserTrackingUsageDescription = "Please allow access to your activity tracking to provide personalized push services and reduce interference caused by irrelevant services.";
@@ -409,6 +410,7 @@
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.testbird.SnowBrowser;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;

@@ -23,15 +23,17 @@ class TermsViewController: BaseViewController {
         title = "Terms of Use"
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "back")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(back))
         textView.text = """
-The following terms and conditions (the “Terms”) govern your use of the VPN services we provide (the “Service”) and their associated website domains (the “Site”). These Terms constitute a legally binding agreement (the “Agreement”) between you and Tap VPN. (the “Tap VPN”).
+Use of the application
+1. You accept that we will use your information for the purposes required by law and regulation.
+2. You accept that you may not use our applications for unlawful purposes.
+3. You accept that we may stop providing our products and services at any time without prior notice to you.
 
-Activation of your account constitutes your agreement to be bound by the Terms and a representation that you are at least eighteen (18) years of age, and that the registration information you have provided is accurate and complete.
 
-Tap VPN may update the Terms from time to time without notice. Any changes in the Terms will be incorporated into a revised Agreement that we will post on the Site. Unless otherwise specified, such changes shall be effective when they are posted. If we make material changes to these Terms, we will aim to notify you via email or when you log in at our Site.
-
-By using Tap VPN
-You agree to comply with all applicable laws and regulations in connection with your use of this service.regulations in connection with your use of this service.
-
+Update
+We may update this page from time to time. We recommend that you check this page regularly for updates.
+Contact us
+If you have any questions about this Privacy Policy, please contact us
+timelock0987@outlook.com
 """
     }
 
