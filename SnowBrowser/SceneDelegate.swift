@@ -62,6 +62,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneWillEnterForeground(_ scene: UIScene) {
         // Called as the scene transitions from the background to the foreground.
         // Use this method to undo the changes made on entering the background.
+        GADHelper.share.requestRemoteConfig()
+        
+        if let vc = window?.rootViewController?.presentedViewController {
+            vc.dismiss(animated: true)
+        }
+        
         if AppEnterbackground {
             FirebaseHelper.log(event: .openHot)
         }
@@ -79,6 +85,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
         AppEnterbackground = true
+        
+        GADHelper.share.close(.native)
     }
 
 

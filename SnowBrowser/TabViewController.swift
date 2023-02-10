@@ -9,6 +9,8 @@ import UIKit
 
 class TabViewController: BaseViewController {
     
+    var willAppear = false
+    
     lazy var collection: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -18,6 +20,17 @@ class TabViewController: BaseViewController {
         view.delegate = self
         view.backgroundColor = .clear
         view.register(TabItemCell.classForCoder(), forCellWithReuseIdentifier: "TabItemCell")
+        return view
+    }()
+    
+    lazy var adView: GADNativeView = {
+        let view = GADNativeView()
+        view.backgroundColor = .white
+        view.layer.shadowColor = UIColor.hex("#000000", alpha: 0.3).cgColor
+        view.layer.shadowOffset = CGSize(width: 10, height: 10)
+        view.layer.shadowRadius = 10
+        view.layer.shadowOpacity = 1.0
+        view.layer.cornerRadius = 20
         return view
     }()
     
@@ -49,15 +62,44 @@ class TabViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(forName: .nativeUpdate, object: nil, queue: .main) { [weak self] noti in
+            if let ad = noti.object as? NativeADModel, self?.willAppear == true {
+                if Date().timeIntervalSince1970 - (GADHelper.share.tabNativeAdImpressionDate ?? Date(timeIntervalSinceNow: -11)).timeIntervalSince1970 > 10 {
+                    self?.adView.nativeAd = ad.nativeAd
+                    GADHelper.share.tabNativeAdImpressionDate = Date()
+                } else {
+                    NSLog("[ad] 10s tab 原生广告刷新或数据填充间隔.")
+                }
+            } else {
+                self?.adView.nativeAd = nil
+            }
+        }
+        
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        collection.frame = CGRect(x: 16, y: view.safeAreaInsets.top + 20, width: kWidth - 16 * 2, height: kHeight - view.safeAreaInsets.top - view.safeAreaInsets.bottom - 20 - 66)
-        bottomView.frame = CGRect(x: 0, y: collection.frame.maxY, width: kWidth, height: 66 + view.safeAreaInsets.bottom)
+        collection.frame = CGRect(x: 16, y: view.safeAreaInsets.top + 20, width: kWidth - 16 * 2, height: kHeight - view.safeAreaInsets.top - view.safeAreaInsets.bottom - 20 - 66 - 20 - 120 * kRadioH)
+        adView.frame = CGRect(x: 16, y: collection.frame.maxY + 20, width: view.frame.width - 32, height: 120 * kRadioH)
+        
+        
+        bottomView.frame = CGRect(x: 0, y: adView.frame.maxY + 20, width: kWidth, height: 66 + view.safeAreaInsets.bottom)
         
         bottomAddButton.frame = CGRect(x: (kWidth - 36) / 2.0, y: 15, width: 36, height: 36)
         backButton.frame = CGRect(x: kWidth - 16 - 36, y: 23, width: 36, height: 20)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        willAppear = true
+        GADHelper.share.load(.native)
+        GADHelper.share.load(.interstitial)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        willAppear = false
+        
+        GADHelper.share.close(.native)
     }
 }
 
@@ -68,6 +110,7 @@ extension TabViewController {
         view.backgroundColor = UIColor.hex("#F5F7FA")
         
         view.addSubview(collection)
+        view.addSubview(adView)
         view.addSubview(bottomView)
         bottomView.addSubview(bottomAddButton)
         bottomView.addSubview(backButton)

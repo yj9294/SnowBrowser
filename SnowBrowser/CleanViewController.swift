@@ -9,7 +9,8 @@ import UIKit
 
 class CleanViewController: BaseViewController {
     
-    var timer: Timer?
+    var adTimer: Timer?
+    var afterTimer: Timer?
     
     var dismissHandle: (()->Void)? = nil
     
@@ -30,11 +31,53 @@ class CleanViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        if timer != nil {
-            timer?.invalidate()
-            timer = nil
+        
+        if adTimer != nil {
+            adTimer?.invalidate()
+            adTimer = nil
         }
-        timer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(stopAnimation), userInfo: nil, repeats: true)
+        
+        if afterTimer != nil {
+            afterTimer?.invalidate()
+            afterTimer = nil
+        }
+        
+        var progress = 0.0
+        var duration = 2 / 0.6
+        var isNeedShowAd = false
+        
+        adTimer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { [weak self] t in
+            if progress >= 1.0 {
+                t.invalidate()
+                GADHelper.share.show(.interstitial, from: self) { _ in
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        self?.stopAnimation()
+                    }
+                }
+            } else {
+                progress += 1.0 / (duration * 100)
+            }
+            
+            if isNeedShowAd, GADHelper.share.isLoaded(.interstitial) {
+                duration = 0.1
+            }
+        }
+        
+        afterTimer = Timer.scheduledTimer(withTimeInterval: 2, repeats: true, block: { t in
+            t.invalidate()
+            isNeedShowAd = true
+            duration = 16.0
+        })
+        
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { t in
+            if GADHelper.share.isADLimited {
+                t.invalidate()
+                self.stopAnimation()
+            }
+        }
+        
+        GADHelper.share.load(.interstitial)
+        GADHelper.share.load(.native)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -67,8 +110,12 @@ extension CleanViewController {
     
     @objc func stopAnimation() {
         icon.layer.removeAllAnimations()
-        timer?.invalidate()
-        timer = nil
+        adTimer?.invalidate()
+        adTimer = nil
+        
+        afterTimer?.invalidate()
+        afterTimer = nil
+        
         dismissHandle?()
         dismiss(animated: true)
     }

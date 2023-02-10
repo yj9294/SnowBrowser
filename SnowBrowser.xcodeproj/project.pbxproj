@@ -30,6 +30,10 @@
 		C71E595F296D30E80035B48A /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = C71E595E296D30E80035B48A /* FirebaseRemoteConfig */; };
 		C71E5962296D314C0035B48A /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = C71E5961296D314C0035B48A /* FacebookCore */; };
 		C71E5964296E52DA0035B48A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C71E5963296E52DA0035B48A /* GoogleService-Info.plist */; };
+		C7B8914929751CE3003EE71F /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = C7B8914829751CE3003EE71F /* GoogleMobileAds */; };
+		C7B8914B29751DC8003EE71F /* GADHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B8914A29751DC8003EE71F /* GADHelper.swift */; };
+		C7B8914D29751DFC003EE71F /* GADNativeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B8914C29751DFC003EE71F /* GADNativeView.swift */; };
+		C7B8914F29751F70003EE71F /* GADConfig.json in Resources */ = {isa = PBXBuildFile; fileRef = C7B8914E29751F70003EE71F /* GADConfig.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +58,9 @@
 		C71E5955296BBFE80035B48A /* CleanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanViewController.swift; sourceTree = "<group>"; };
 		C71E5957296D305C0035B48A /* FirebaseHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseHelper.swift; sourceTree = "<group>"; };
 		C71E5963296E52DA0035B48A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C7B8914A29751DC8003EE71F /* GADHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GADHelper.swift; sourceTree = "<group>"; };
+		C7B8914C29751DFC003EE71F /* GADNativeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GADNativeView.swift; sourceTree = "<group>"; };
+		C7B8914E29751F70003EE71F /* GADConfig.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GADConfig.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +70,7 @@
 			files = (
 				C71E595F296D30E80035B48A /* FirebaseRemoteConfig in Frameworks */,
 				C71E595B296D30E80035B48A /* FirebaseAnalytics in Frameworks */,
+				C7B8914929751CE3003EE71F /* GoogleMobileAds in Frameworks */,
 				C71E595D296D30E80035B48A /* FirebaseCrashlytics in Frameworks */,
 				C71E5962296D314C0035B48A /* FacebookCore in Frameworks */,
 			);
@@ -105,6 +113,9 @@
 				C71E594D296817440035B48A /* SettingView.swift */,
 				C71E5953296BBB830035B48A /* CleanAlertView.swift */,
 				C71E59472967CD5C0035B48A /* BrowserHelper.swift */,
+				C7B8914A29751DC8003EE71F /* GADHelper.swift */,
+				C7B8914E29751F70003EE71F /* GADConfig.json */,
+				C7B8914C29751DFC003EE71F /* GADNativeView.swift */,
 				C71E5957296D305C0035B48A /* FirebaseHelper.swift */,
 				C71E59322966BC940035B48A /* Assets.xcassets */,
 				C71E5963296E52DA0035B48A /* GoogleService-Info.plist */,
@@ -135,6 +146,7 @@
 				C71E595C296D30E80035B48A /* FirebaseCrashlytics */,
 				C71E595E296D30E80035B48A /* FirebaseRemoteConfig */,
 				C71E5961296D314C0035B48A /* FacebookCore */,
+				C7B8914829751CE3003EE71F /* GoogleMobileAds */,
 			);
 			productName = SnowBrowser;
 			productReference = C71E59262966BC920035B48A /* SnowBrowser.app */;
@@ -167,6 +179,7 @@
 			packageReferences = (
 				C71E5959296D30E80035B48A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				C71E5960296D314C0035B48A /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
+				C7B8914729751CE3003EE71F /* XCRemoteSwiftPackageReference "GoogleMobileAds" */,
 			);
 			productRefGroup = C71E59272966BC920035B48A /* Products */;
 			projectDirPath = "";
@@ -182,6 +195,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C7B8914F29751F70003EE71F /* GADConfig.json in Resources */,
 				C71E59362966BC940035B48A /* LaunchScreen.storyboard in Resources */,
 				C71E5964296E52DA0035B48A /* GoogleService-Info.plist in Resources */,
 				C71E59332966BC940035B48A /* Assets.xcassets in Resources */,
@@ -202,10 +216,12 @@
 				C71E594E296817440035B48A /* SettingView.swift in Sources */,
 				C71E5958296D305C0035B48A /* FirebaseHelper.swift in Sources */,
 				C71E592A2966BC920035B48A /* AppDelegate.swift in Sources */,
+				C7B8914B29751DC8003EE71F /* GADHelper.swift in Sources */,
 				C71E59482967CD5D0035B48A /* BrowserHelper.swift in Sources */,
 				C71E59442966C0EE0035B48A /* LaunchingViewController.swift in Sources */,
 				C71E59402966BF870035B48A /* BaseViewController.swift in Sources */,
 				C71E592C2966BC920035B48A /* SceneDelegate.swift in Sources */,
+				C7B8914D29751DFC003EE71F /* GADNativeView.swift in Sources */,
 				C71E594C2968004B0035B48A /* TabViewController.swift in Sources */,
 				C71E5954296BBB830035B48A /* CleanAlertView.swift in Sources */,
 				C71E59462966C0F70035B48A /* LaunchedViewController.swift in Sources */,
@@ -458,6 +474,14 @@
 				minimumVersion = 9.0.0;
 			};
 		};
+		C7B8914729751CE3003EE71F /* XCRemoteSwiftPackageReference "GoogleMobileAds" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/quanghits/GoogleMobileAds";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -480,6 +504,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = C71E5960296D314C0035B48A /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
 			productName = FacebookCore;
+		};
+		C7B8914829751CE3003EE71F /* GoogleMobileAds */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C7B8914729751CE3003EE71F /* XCRemoteSwiftPackageReference "GoogleMobileAds" */;
+			productName = GoogleMobileAds;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -55,6 +55,11 @@ extension RootViewController {
     func launched() {
         state = .launced
         view.bringSubviewToFront(launchedNaviVC.view)
+        
+        launchedVC.willAppear = true
+        GADHelper.share.load(.interstitial)
+        GADHelper.share.load(.native)
+        
         FirebaseHelper.log(event: .homeShow)
     }
     
