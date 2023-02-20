@@ -7,7 +7,6 @@
 
 import UIKit
 import WebKit
-import AppTrackingTransparency
 
 class LaunchedViewController: BaseViewController {
     
@@ -151,8 +150,6 @@ class LaunchedViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        ATTrackingManager.requestTrackingAuthorization { _ in
-        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

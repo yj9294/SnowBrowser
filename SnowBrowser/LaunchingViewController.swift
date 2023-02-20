@@ -70,7 +70,7 @@ extension LaunchingViewController {
     }
     
     func launching() {
-        let duration = 2.5
+        let duration = 3.0
         self.progress = 0.0
         if progressTimer != nil {
             progressTimer?.invalidate()

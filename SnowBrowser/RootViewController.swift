@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AppTrackingTransparency
 
 class RootViewController: BaseViewController {
     
@@ -54,6 +55,10 @@ extension RootViewController {
     
     func launched() {
         state = .launced
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            ATTrackingManager.requestTrackingAuthorization { _ in
+            }
+        }
         view.bringSubviewToFront(launchedNaviVC.view)
         FirebaseHelper.log(event: .homeShow)
     }
