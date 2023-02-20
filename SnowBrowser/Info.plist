@@ -21,10 +21,6 @@
 	<string>981c9f1ae90423b17719e45cafb72c46</string>
 	<key>FacebookDisplayName</key>
 	<string>SnowBrowser</string>
-	<key>GADIsAdManagerApp</key>
-	<true/>
-	<key>GADNativeAdValidatorEnabled</key>
-	<false/>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>
