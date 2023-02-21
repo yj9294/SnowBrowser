@@ -22,6 +22,8 @@ class LaunchedViewController: BaseViewController {
     
     var startDate: Date? = nil
     
+    var willAppear: Bool = false
+    
     var webView: WKWebView {
         BrowserHelper.shared.webItem.webView
     }
@@ -150,33 +152,52 @@ class LaunchedViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(forName: .nativeUpdate, object: nil, queue: .main) { [weak self] noti in
+            if let ad = noti.object as? NativeADModel, self?.willAppear == true {
+                if Date().timeIntervalSince1970 - (GADHelper.share.homeNativeAdImpressionDate ?? Date(timeIntervalSinceNow: -11)).timeIntervalSince1970 > 10 {
+                    self?.adView.nativeAd = ad.nativeAd
+                    GADHelper.share.homeNativeAdImpressionDate = Date()
+                } else {
+                    NSLog("[ad] 10s home 原生广告刷新或数据填充间隔.")
+                }
+            } else {
+                self?.adView.nativeAd = nil
+            }
+        }
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.isHidden = true
         webviewLayout()
-        if rootVC?.state == .launced {
+        if rootVC?.state == .launced, willAppear == false {
+            willAppear = true
+            GADHelper.share.load(.interstitial)
+            GADHelper.share.load(.native)
             FirebaseHelper.log(event: .homeShow)
         }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         navigationController?.navigationBar.isHidden = false
+        willAppear = false
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        searchView.frame = CGRect(x: 16, y: 20 + view.safeAreaInsets.top, width: kWidth - 16 * 2, height: 56)
-        searchTextField.frame =  CGRect(x: 16, y: 0, width: searchView.frame.width - 24 - 16*2 - 10, height: 56)
+        searchView.frame = CGRect(x: 16, y: 20 + view.safeAreaInsets.top, width: kWidth - 16 * 2, height: 56 * kRadioH)
+        searchTextField.frame =  CGRect(x: 16, y: 0, width: searchView.frame.width - 24 - 16*2 - 10, height: 56 * kRadioH)
+        
         searchButton.frame = CGRect(x: searchTextField.frame.maxX + 10 , y: 16, width: 24, height: 24)
         closeButton.frame = searchButton.frame
         
         progressView.frame = CGRect(x: 0, y: searchView.frame.maxY + 5, width: kWidth, height: 4)
         
-        contentView.frame = CGRect(x: 0, y: progressView.frame.maxY + 5, width: kWidth, height: kHeight - progressView.frame.maxY - 5 - 66 - view.safeAreaInsets.bottom)
-        contentIcon.frame = CGRect(x: (kWidth - 160) / 2.0, y: 30, width: 160, height: 160)
-        contentWhiteView.frame = CGRect(x: 0, y: contentIcon.frame.maxY + 30, width: kWidth, height: contentView.frame.height - 160 - 30*2 )
-        contentCollection.frame = CGRect(x: 0, y: (contentWhiteView.frame.height - ((kWidth / 4.0 - 10) * 2 + 15)) / 2.0, width: contentWhiteView.frame.width, height: (kWidth / 4.0 - 10) * 2 + 15)
+        contentView.frame = CGRect(x: 0, y: progressView.frame.maxY + 2, width: kWidth, height: kHeight - progressView.frame.maxY - 5 - 66 - view.safeAreaInsets.bottom)
+        contentIcon.frame = CGRect(x: (kWidth - 160 * kRadioH) / 2.0, y: 20 * kRadioH, width: 160 * kRadioH, height: 160 * kRadioH)
+        contentWhiteView.frame = CGRect(x: 0, y: contentIcon.frame.maxY + 20 * kRadioH, width: kWidth, height: contentView.frame.height - (160 - 20*2) * kRadioH )
+        contentCollection.frame = CGRect(x: 0, y: 16, width: contentWhiteView.frame.width, height: (kWidth / 4.0 - 10) * 2 + 15)
+        adView.frame = CGRect(x: 16, y: contentCollection.frame.maxY + 18, width: view.frame.width  - 32, height: 120 * kRadioH)
         
         bottomView.frame = CGRect(x: 0, y: contentView.frame.maxY, width: kWidth, height: 66 + view.safeAreaInsets.bottom)
         let padding = (kWidth - 18 * 2 - 32 * 5 ) / 4.0
@@ -280,6 +301,7 @@ extension LaunchedViewController {
         contentView.addSubview(contentIcon)
         contentView.addSubview(contentWhiteView)
         contentWhiteView.addSubview(contentCollection)
+        contentWhiteView.addSubview(adView)
         
         view.addSubview(bottomView)
         bottomView.addSubview(lastButton)
@@ -328,11 +350,14 @@ extension LaunchedViewController {
         view.frame = self.view.bounds
         self.view.addSubview(view)
         view.confirmHandle = {
+            self.willAppear = false
+            GADHelper.share.close(.native)
+
             let vc = CleanViewController()
             vc.modalPresentationStyle = .fullScreen
             vc.dismissHandle = {
                 FirebaseHelper.log(event: .cleanSuccess)
-                DispatchQueue.main.async {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                     if rootVC?.state == .launced {
                         self.alert("Cleaned successfully.")
                         FirebaseHelper.log(event: .cleanAlert)
@@ -347,6 +372,9 @@ extension LaunchedViewController {
     }
     
     @objc func tabAction() {
+        willAppear = false
+        GADHelper.share.close(.native)
+
         self.view.endEditing(true)
         let vc = TabViewController()
         vc.modalPresentationStyle = .fullScreen
