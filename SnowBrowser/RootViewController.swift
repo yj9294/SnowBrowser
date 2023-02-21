@@ -47,6 +47,7 @@ class RootViewController: BaseViewController {
 }
 
 extension RootViewController {
+    
     override func setupUI() {
         super.setupUI()
         view.addSubview(launchedNaviVC.view)
@@ -73,4 +74,5 @@ extension RootViewController {
         launchingVC.launching()
         view.bringSubviewToFront(launchingVC.view)
     }
+    
 }

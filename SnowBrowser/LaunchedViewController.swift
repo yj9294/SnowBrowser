@@ -89,6 +89,17 @@ class LaunchedViewController: BaseViewController {
         return collection
     }()
     
+    lazy var adView: GADNativeView = {
+        let view = GADNativeView()
+        view.backgroundColor = .white
+        view.layer.shadowColor = UIColor.hex("#000000", alpha: 0.3).cgColor
+        view.layer.shadowOffset = CGSize(width: 10, height: 10)
+        view.layer.shadowRadius = 10
+        view.layer.shadowOpacity = 1.0
+        view.layer.cornerRadius = 20
+        return view
+    }()
+    
     lazy var contentWhiteView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
