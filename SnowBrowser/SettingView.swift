@@ -152,7 +152,7 @@ extension SettingView {
     
     @objc func shareAction() {
         dismiss()
-        var url = "https://itunes.apple.com/cn/app/id"
+        var url = "https://itunes.apple.com/cn/app/id1671081552"
         if !BrowserHelper.shared.webItem.isNavigation, let text = BrowserHelper.shared.webItem.webView.url?.absoluteString {
             url = text
         }
@@ -175,7 +175,7 @@ extension SettingView {
     
     @objc func rateAction() {
         dismiss()
-        let url = URL(string: "https://itunes.apple.com/cn/app/id")
+        let url = URL(string: "https://itunes.apple.com/cn/app/id1671081552")
         if let url = url {
             UIApplication.shared.open(url)
         }

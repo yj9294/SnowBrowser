@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>1088795628198-o30gttkvb3ioqj3jpa8nssrfbbadq3eh.apps.googleusercontent.com</string>
+	<string>1020606587688-c7dqmi24n05h61pq0rdc8rf4is6cl97i.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.1088795628198-o30gttkvb3ioqj3jpa8nssrfbbadq3eh</string>
+	<string>com.googleusercontent.apps.1020606587688-c7dqmi24n05h61pq0rdc8rf4is6cl97i</string>
 	<key>API_KEY</key>
-	<string>AIzaSyCL352YPJ8yAhv-WelgAI8CMC0xbuJyJqU</string>
+	<string>AIzaSyAtWgPHg8koJuKksxTHB66G-0qffcxOwMI</string>
 	<key>GCM_SENDER_ID</key>
-	<string>1088795628198</string>
+	<string>1020606587688</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.testbird.spark.2</string>
+	<string>com.snow.gocod.girl.boy</string>
 	<key>PROJECT_ID</key>
-	<string>testbird-f2fe7</string>
+	<string>snow-browser-ios</string>
 	<key>STORAGE_BUCKET</key>
-	<string>testbird-f2fe7.appspot.com</string>
+	<string>snow-browser-ios.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:1088795628198:ios:52ec35ee7ed596e92dda67</string>
+	<string>1:1020606587688:ios:bf4648843e2956d40fa61d</string>
 </dict>
 </plist>
