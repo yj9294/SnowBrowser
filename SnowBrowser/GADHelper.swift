@@ -87,33 +87,33 @@ extension GADHelper {
             }
         }
         
-        /// 远程配置
-        let remoteConfig = RemoteConfig.remoteConfig()
-        let settings = RemoteConfigSettings()
-        remoteConfig.configSettings = settings
-        remoteConfig.fetch { [weak remoteConfig] (status, error) -> Void in
-            if status == .success {
-                NSLog("[Config] Config fetcher! ✅")
-                remoteConfig?.activate(completion: { _, _ in
-                    let keys = remoteConfig?.allKeys(from: .remote)
-                    NSLog("[Config] config params = \(keys ?? [])")
-                    if let remoteAd = remoteConfig?.configValue(forKey: "adConfig").stringValue {
-                        // base64 的remote 需要解码
-                        let data = Data(base64Encoded: remoteAd) ?? Data()
-                        if let remoteADConfig = try? JSONDecoder().decode(ADConfig.self, from: data) {
-                            // 需要在主线程
-                            DispatchQueue.main.async {
-                                self.adConfig = remoteADConfig
-                            }
-                        } else {
-                            NSLog("[Config] Config config 'ad_config' is nil or config not json.")
-                        }
-                    }
-                })
-            } else {
-                NSLog("[Config] config not fetcher, error = \(error?.localizedDescription ?? "")")
-            }
-        }
+//        /// 远程配置
+//        let remoteConfig = RemoteConfig.remoteConfig()
+//        let settings = RemoteConfigSettings()
+//        remoteConfig.configSettings = settings
+//        remoteConfig.fetch { [weak remoteConfig] (status, error) -> Void in
+//            if status == .success {
+//                NSLog("[Config] Config fetcher! ✅")
+//                remoteConfig?.activate(completion: { _, _ in
+//                    let keys = remoteConfig?.allKeys(from: .remote)
+//                    NSLog("[Config] config params = \(keys ?? [])")
+//                    if let remoteAd = remoteConfig?.configValue(forKey: "adConfig").stringValue {
+//                        // base64 的remote 需要解码
+//                        let data = Data(base64Encoded: remoteAd) ?? Data()
+//                        if let remoteADConfig = try? JSONDecoder().decode(ADConfig.self, from: data) {
+//                            // 需要在主线程
+//                            DispatchQueue.main.async {
+//                                self.adConfig = remoteADConfig
+//                            }
+//                        } else {
+//                            NSLog("[Config] Config config 'ad_config' is nil or config not json.")
+//                        }
+//                    }
+//                })
+//            } else {
+//                NSLog("[Config] config not fetcher, error = \(error?.localizedDescription ?? "")")
+//            }
+//        }
         
         /// 广告配置是否是当天的
         if limit == nil || limit?.date.isToday != true {
@@ -180,7 +180,7 @@ extension GADHelper {
             $0.position == position
         }.first
         switch position {
-        case .interstitial:
+        case .interstitial, .open:
             /// 有廣告
             if let ad = loadAD?.loadedArray.first as? InterstitialADModel, !AppEnterbackground, !isADLimited {
                 ad.impressionHandler = { [weak self, loadAD] in
@@ -369,7 +369,7 @@ struct ADLimit: Codable {
 }
 
 enum ADPosition: String, CaseIterable {
-    case all, native, interstitial
+    case all, native, interstitial, open
 
     var isNativeAD: Bool {
         switch self {

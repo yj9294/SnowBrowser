@@ -2,6 +2,12 @@
         "showTimes": 30,
         "clickTimes": 5,
         "ads": [{
+            "key": "open",
+            "value": [{
+                    "theAdPriority": 1,
+                    "theAdID": "ca-app-pub-9565453290773135~7775905869"
+            }]
+        },{
             "key": "interstitial",
             "value": [{
                     "theAdPriority": 1,

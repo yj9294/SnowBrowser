@@ -92,7 +92,7 @@ extension LaunchingViewController {
             debugPrint(self.progress)
             if self.progress >= 1.0 {
                 t.invalidate()
-                GADHelper.share.show(.interstitial, from: self) { _ in
+                GADHelper.share.show(.open, from: self) { _ in
                     if self.progress >= 1.0 {
                         rootVC?.launched()
                     }
@@ -100,7 +100,7 @@ extension LaunchingViewController {
                 return
             }
             
-            if isShow, GADHelper.share.isLoaded(.interstitial) {
+            if isShow, GADHelper.share.isLoaded(.open) {
                 isShow = false
                 self.duration = 0.1
             }
@@ -112,6 +112,7 @@ extension LaunchingViewController {
         })
         
         GADHelper.share.load(.interstitial)
+        GADHelper.share.load(.open)
         GADHelper.share.load(.native)
     }
 }
